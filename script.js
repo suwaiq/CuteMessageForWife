@@ -1,14 +1,20 @@
 document.getElementById('revealButton').addEventListener('click', function() {
-    var secretMessage = document.getElementById('secretMessage');
-    if (secretMessage.classList.contains('hidden')) {
-        secretMessage.classList.remove('hidden');
-        setTimeout(function() {
-            secretMessage.style.opacity = 1;
-        }, 10); // Delay for CSS transition
+    var firstMessage = document.getElementById('firstMessage');
+    var secondMessage = document.getElementById('secondMessage');
+    var button = document.getElementById('revealButton');
+
+    // Check which message is currently shown
+    if (firstMessage.classList.contains('hidden') && secondMessage.classList.contains('hidden')) {
+        // If no message is shown, show the first message
+        firstMessage.classList.remove('hidden');
+        button.textContent = 'Click me again!';
+    } else if (!firstMessage.classList.contains('hidden')) {
+        // If the first message is shown, hide it and show the second message
+        firstMessage.classList.add('hidden');
+        secondMessage.classList.remove('hidden');
     } else {
-        secretMessage.style.opacity = 0;
-        setTimeout(function() {
-            secretMessage.classList.add('hidden');
-        }, 500); // Match the duration of the opacity transition
+        // If the second message is shown, do nothing or hide the second message
+        secondMessage.classList.add('hidden');
+        button.textContent = 'Click me!';
     }
 });
